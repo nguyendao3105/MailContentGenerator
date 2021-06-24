@@ -530,7 +530,16 @@ namespace MailContentGenerator
         public List<Customer> GetCustomerList()
         {
             CSVReader input = new CSVReader(_csvFile);
-            return input.ReadCSV();
+            List<Customer> result = new List<Customer>();
+            try
+            {
+                result = input.ReadCSV();
+            }catch(Exception e)
+            {
+                Console.WriteLine(e.Message);
+                Console.WriteLine("May be input file is not in correct form");
+            }
+            return result;
         }
 
         public Dictionary<string, Mail> GetAllMail()
